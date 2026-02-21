@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { FileText, Shield, Clock, CheckCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+  const { user } = useAuth();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-50">
       {/* Hero Section */}
@@ -16,12 +19,20 @@ const Home = () => {
             Upload, sign, and share documents in minutes.
           </p>
           <div className="flex justify-center space-x-4">
-            <Link to="/register" className="btn-primary text-lg px-8 py-3">
-              Get Started Free
-            </Link>
-            <Link to="/login" className="btn-secondary text-lg px-8 py-3">
-              Sign In
-            </Link>
+            {user ? (
+              <Link to="/dashboard" className="btn-primary text-lg px-8 py-3 w-64 text-center">
+                Go to Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link to="/register" className="btn-primary text-lg px-8 py-3">
+                  Get Started Free
+                </Link>
+                <Link to="/login" className="btn-secondary text-lg px-8 py-3">
+                  Sign In
+                </Link>
+              </>
+            )}
           </div>
         </div>
 
