@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 import { Mail, Lock, User } from 'lucide-react';
@@ -11,7 +11,7 @@ const Register = () => {
     password: '',
   });
   const [loading, setLoading] = useState(false);
-  const { register } = useAuth();
+  const { register, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -32,6 +32,10 @@ const Register = () => {
       setLoading(false);
     }
   };
+
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" replace />;
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-primary-100 py-12 px-4 sm:px-6 lg:px-8">
