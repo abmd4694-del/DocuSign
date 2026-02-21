@@ -16,7 +16,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
+            {/* THIS IS THE FIX: Link points to /dashboard if logged in */}
+            <Link to={isAuthenticated ? '/dashboard' : '/'} className="flex items-center space-x-2">
               <FileText className="h-8 w-8 text-primary-600" />
               <span className="text-xl font-bold text-gray-900">
                 DocuSign
